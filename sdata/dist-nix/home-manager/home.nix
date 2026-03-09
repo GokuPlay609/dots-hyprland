@@ -95,6 +95,7 @@ quickshell, home_attrs, ... }:
       darkly darkly-qt5 #darkly-bin
       eza #eza
       #fish (Currently install via system PM; TODO: should install via nix in future when authentication problem fixed)
+      zsh zsh-autosuggestions zsh-syntax-highlighting #zsh
       fontconfig #fontconfig
       kitty #kitty (Used in fuzzel, Hyprland, kdeglobals and Quickshell config; kitty config is also included as dots)
       matugen #matugen-bin (Used in Quickshell)

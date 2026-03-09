@@ -8,7 +8,7 @@
 # - `skip-if-exists`: Skip this step if target exists
 version: "1.0"
 user_preferences:
-  shell: "fish" # fish | zsh
+  shell: "zsh" # fish | zsh
   terminal: "foot" # kitty | foot
   keybindings: "default" # default | vim
 patterns:
@@ -27,6 +27,12 @@ patterns:
   - from: "dots/.config/zshrc.d"
     to: "$XDG_CONFIG_HOME/zshrc.d"
     mode: "sync"
+    condition:
+      type: "shell"
+      value: "zsh"
+  - from: "dots/.zshrc"
+    to: "$HOME/.zshrc"
+    mode: "soft"
     condition:
       type: "shell"
       value: "zsh"
