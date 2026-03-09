@@ -9,6 +9,7 @@ LICENSE="metapackage"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
 RESTRICT="strip"
+IUSE="+zsh +zsh-autosuggestions +zsh-syntax-highlighting"
 
 DEPEND=""
 RDEPEND="
@@ -18,9 +19,9 @@ RDEPEND="
 	x11-themes/darkly
 	sys-apps/eza
 	app-shells/fish
-	app-shells/zsh
-	app-shells/zsh-autosuggestions
-	app-shells/zsh-syntax-highlighting
+	zsh? ( app-shells/zsh )
+	zsh-autosuggestions? ( app-shells/zsh-autosuggestions )
+	zsh-syntax-highlighting? ( app-shells/zsh-syntax-highlighting )
 	media-libs/fontconfig
 	x11-terms/kitty
 	x11-misc/matugen

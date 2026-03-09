@@ -27,6 +27,9 @@ bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
 
 # Completion
+if [ ! -d "$HOME/.zcache" ]; then
+    mkdir -p "$HOME/.zcache" || echo "Warning: Could not create $HOME/.zcache"
+fi
 autoload -Uz compinit
 compinit -d "$HOME/.zcache/zcompdump"
 zstyle ':completion:*' menu select
@@ -57,7 +60,41 @@ fi
 if [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
     source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
-# Nix/Gentoo paths might vary, but can be added or typically they are managed by the PM
+# Gentoo
+if [ -f /usr/share/zsh/site-functions/zsh-autosuggestions.zsh ]; then
+    source /usr/share/zsh/site-functions/zsh-autosuggestions.zsh
+fi
+if [ -f /usr/share/zsh/site-functions/zsh-syntax-highlighting.zsh ]; then
+    source /usr/share/zsh/site-functions/zsh-syntax-highlighting.zsh
+fi
+# Nix FHS/Profile paths
+if [ -f ~/.nix-profile/share/zsh/site-functions/zsh-autosuggestions.zsh ]; then
+    source ~/.nix-profile/share/zsh/site-functions/zsh-autosuggestions.zsh
+elif [ -f ~/.nix-profile/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    source ~/.nix-profile/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+if [ -f ~/.nix-profile/share/zsh/site-functions/zsh-syntax-highlighting.zsh ]; then
+    source ~/.nix-profile/share/zsh/site-functions/zsh-syntax-highlighting.zsh
+elif [ -f ~/.nix-profile/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source ~/.nix-profile/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+# Nix System paths
+setopt nullglob
+for f in /nix/store/*/share/zsh-*/zsh-autosuggestions.zsh /run/current-system/sw/share/zsh-*/zsh-autosuggestions.zsh; do
+    if [ -f "$f" ]; then
+        source "$f"
+        break
+    fi
+done
+for f in /nix/store/*/share/zsh-*/zsh-syntax-highlighting.zsh /run/current-system/sw/share/zsh-*/zsh-syntax-highlighting.zsh; do
+    if [ -f "$f" ]; then
+        source "$f"
+        break
+    fi
+done
+unsetopt nullglob
+
+# Optional system-level nix logic
 if [ -f /etc/profile.d/nix.sh ]; then
     source /etc/profile.d/nix.sh
 fi

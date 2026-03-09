@@ -45,9 +45,10 @@ wizard_update_preferences() {
     read -p "Enter choice [1-2]: " shell_choice
 
     case "$shell_choice" in
-      1|"") shell="zsh" ;;
+      1) shell="zsh" ;;
       2) shell="fish" ;;
-      *) echo "Invalid choice, using zsh"; shell="zsh" ;;
+      "") shell="$current_shell" ;;
+      *) echo "Invalid choice, keeping $current_shell"; shell="$current_shell" ;;
     esac
 
     # Terminal selection

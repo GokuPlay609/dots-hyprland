@@ -71,7 +71,7 @@ patterns:
     mode: "soft"
   - from: "dots/.local/share/konsole"
     to: "$XDG_DATA_HOME/konsole"
-    mode: "soft"
+    mode: "hard-backup"
   # Fontconfig (default - fontsets handled separately if FONTSET_DIR_NAME is set)
   - from: "dots/.config/fontconfig"
     to: "$XDG_CONFIG_HOME/fontconfig"
