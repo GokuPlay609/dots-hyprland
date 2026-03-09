@@ -2,7 +2,7 @@
 ColorScheme=MaterialYou
 
 [General]
-Command=/bin/fish
+Command=
 Environment=COLORTERM=truecolor
 Name=Profile 1
 Parent=FALLBACK/

@@ -11,6 +11,9 @@ depends=(
   darkly-bin
   eza
   fish
+  zsh
+  zsh-autosuggestions
+  zsh-syntax-highlighting
   fontconfig
   kitty
   matugen

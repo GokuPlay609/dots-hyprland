@@ -28,7 +28,7 @@ wizard_update_preferences() {
   echo -e "${STY_CYAN}=== Dotfiles Customization ===${STY_RESET}"
 
     # Get current preferences
-    current_shell=$(yq '.user_preferences.shell // "fish"' "$CONFIG_FILE")
+    current_shell=$(yq '.user_preferences.shell // "zsh"' "$CONFIG_FILE")
     current_terminal=$(yq '.user_preferences.terminal // "kitty"' "$CONFIG_FILE")
     current_keybindings=$(yq '.user_preferences.keybindings // "default"' "$CONFIG_FILE")
 
@@ -40,14 +40,15 @@ wizard_update_preferences() {
 
     # Shell selection
     echo "Which shell do you prefer?"
-    echo "1) fish (default)"
-    echo "2) zsh"
+    echo "1) zsh (default)"
+    echo "2) fish"
     read -p "Enter choice [1-2]: " shell_choice
 
     case "$shell_choice" in
-      1|"") shell="fish" ;;
-      2) shell="zsh" ;;
-      *) echo "Invalid choice, using fish"; shell="fish" ;;
+      1) shell="zsh" ;;
+      2) shell="fish" ;;
+      "") shell="$current_shell" ;;
+      *) echo "Invalid choice, keeping $current_shell"; shell="$current_shell" ;;
     esac
 
     # Terminal selection

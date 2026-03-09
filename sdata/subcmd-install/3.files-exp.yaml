@@ -8,7 +8,7 @@
 # - `skip-if-exists`: Skip this step if target exists
 version: "1.0"
 user_preferences:
-  shell: "fish" # fish | zsh
+  shell: "zsh" # fish | zsh
   terminal: "foot" # kitty | foot
   keybindings: "default" # default | vim
 patterns:
@@ -27,6 +27,12 @@ patterns:
   - from: "dots/.config/zshrc.d"
     to: "$XDG_CONFIG_HOME/zshrc.d"
     mode: "sync"
+    condition:
+      type: "shell"
+      value: "zsh"
+  - from: "dots/.zshrc"
+    to: "$HOME/.zshrc"
+    mode: "soft"
     condition:
       type: "shell"
       value: "zsh"
@@ -65,7 +71,7 @@ patterns:
     mode: "soft"
   - from: "dots/.local/share/konsole"
     to: "$XDG_DATA_HOME/konsole"
-    mode: "soft"
+    mode: "hard-backup"
   # Fontconfig (default - fontsets handled separately if FONTSET_DIR_NAME is set)
   - from: "dots/.config/fontconfig"
     to: "$XDG_CONFIG_HOME/fontconfig"
